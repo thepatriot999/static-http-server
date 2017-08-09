@@ -5,7 +5,7 @@ const server = new Hapi.Server();
 
 server.connection( {
 	port : 8080,
-	host : 'localhost'
+	host : '0.0.0.0'
 } )
 
 server.register( require( 'inert' ), function ( err ) {

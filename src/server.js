@@ -1,12 +1,17 @@
 const Hapi = require( 'hapi' );
+const Fs = require( 'fs' );
 const Path = require( 'path' );
 
 const server = new Hapi.Server();
 
 server.connection( {
-	port : 80,
-	host : '0.0.0.0'
-} )
+	port : process.env.PORT || 80,
+	host : '0.0.0.0',
+	tls  : {
+		key : Fs.readFileSync( 'tls/app.key' ),
+		cert : Fs.readFileSync( 'tls/app.crt' ),
+	}
+} );
 
 server.register( require( 'inert' ), function ( err ) {
 	if ( err ) {
@@ -18,7 +23,8 @@ server.register( require( 'inert' ), function ( err ) {
 		path : '/{param*}',
 		handler : {
 			directory :{
-				path : process.env.DOCUMENT_DIR,
+				//path : '/home/ubuntu/Projects/sis-frontend-ao/dist',
+				path : '/home/ubuntu/Projects/www2',
 				listing : true
 			}
 		}

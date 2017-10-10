@@ -18,7 +18,7 @@ server.register( require( 'inert' ), function ( err ) {
 		path : '/{param*}',
 		handler : {
 			directory :{
-				path : process.env.DOCUMENT_DIR,
+				path : '/home/ubuntu/Projects/www',
 				listing : true
 			}
 		}

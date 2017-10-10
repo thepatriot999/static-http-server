@@ -5,7 +5,7 @@ const Path = require( 'path' );
 const server = new Hapi.Server();
 
 server.connection( {
-	port : process.env.PORT || 80,
+	port : 8080,
 	host : '0.0.0.0',
 	tls  : {
 		key : Fs.readFileSync( 'tls/app.key' ),
@@ -20,11 +20,59 @@ server.register( require( 'inert' ), function ( err ) {
 
 	server.route( {
 		method : 'GET',
-		path : '/{param*}',
+		path : '/{path*}',
 		handler : {
 			directory :{
 				//path : '/home/ubuntu/Projects/sis-frontend-ao/dist',
 				path : '/home/ubuntu/Projects/www2',
+				listing : true
+			}
+		}
+	} )
+
+	server.route( {
+		method : 'GET',
+		path : '/secops/endusers/{param*}',
+		handler : {
+			directory :{
+				//path : '/home/ubuntu/Projects/sis-frontend-ao/dist',
+				path : '/home/ubuntu/Projects/www2',
+				listing : true
+			}
+		}
+	} )
+
+	server.route( {
+		method : 'GET',
+		path : '/secops/scan-job-management/{param*}',
+		handler : {
+			directory :{
+				//path : '/home/ubuntu/Projects/sis-frontend-ao/dist',
+				path : '/home/ubuntu/Projects/www2',
+				listing : true
+			}
+		}
+	} )
+
+	server.route( {
+		method : 'GET',
+		path : '/secops/{path*}',
+		handler : {
+			directory :{
+				//path : '/home/ubuntu/Projects/sis-frontend-ao/dist',
+				path : '/home/ubuntu/Projects/www2',
+				listing : true
+			}
+		}
+	} )
+
+	server.route( {
+		method : 'GET',
+		path : '/admin-ops/{path*}',
+		handler : {
+			directory :{
+				//path : '/home/ubuntu/Projects/sis-frontend-ao/dist',
+				path : '/home/ubuntu/Projects/www2/admin-ops',
 				listing : true
 			}
 		}
